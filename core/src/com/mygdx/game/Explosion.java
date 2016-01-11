@@ -36,7 +36,7 @@ public class Explosion {
 
     }
 
-    public void render() {
+    public static void render() {
         batch.begin();
         spUp.draw(batch);
         spDown.draw(batch);

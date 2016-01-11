@@ -59,7 +59,7 @@ public class Bomb {
         nSpeed++;   //nSpeed changes the time interval at which the sprites are drawn
         if (nSpeed%8 == 0) {
             isExploded = isExploded(j);
-            if (j == 9) {
+            if (j > 6) {
                 explode();
                 for (Explosion explosion : arExplosions) {
                     explosion.render();
