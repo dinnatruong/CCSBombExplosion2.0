@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -13,8 +16,9 @@ public class Bomb {
     SpriteBatch spriteBatch;
     int j, nSpeed, nIndex;
     boolean isExploded;
-    float x, y;
+    float x, y, elapsedTime;
     public Array<Explosion> arExplosions;
+    Animation aniExplosion;
 
     Bomb(TextureAtlas taBombExplode, float fX, float fY, int nCurrentIndex, Sprite sprChar) {
         x = fX;
@@ -44,6 +48,7 @@ public class Bomb {
             spBomb[a].setOrigin(spBomb[a].getHeight() / 2, spBomb[a].getWidth() / 2);
             spBomb[a].setPosition(x, y);
         }
+//        aniExplosion = new Animation(0.2f, spBomb);
         arExplosions = new Array<Explosion>();
     }
 
@@ -54,16 +59,19 @@ public class Bomb {
     }
 
     public void render () {
+//        elapsedTime += Gdx.graphics.getDeltaTime();
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         spriteBatch.begin();
+//        spriteBatch.draw(aniExplosion.getKeyFrame(elapsedTime,true), x, y);
         spBomb[j].draw(spriteBatch);
         nSpeed++;   //nSpeed changes the time interval at which the sprites are drawn
-        if (nSpeed%8 == 0) {
+        if (nSpeed%3 == 0) {
             isExploded = isExploded(j);
             if (j > 6) {
-                explode();
-                for (Explosion explosion : arExplosions) {
-                    explosion.render();
-                    System.out.println("Exploded");
+                    explode();
+                    for (Explosion explosion : arExplosions) {
+                        explosion.render();
+                        System.out.println("Exploded");
                 }
             }
             j++;
